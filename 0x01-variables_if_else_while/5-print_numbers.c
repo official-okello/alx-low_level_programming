@@ -9,9 +9,10 @@ int main(void)
 {
 	char num[10] = '0123456789';
 
-	for (i == 0; i < 10; i++)
+	for (i = 0; i < 10; i++)
 	{
 		putchar(num[i]);
 	}
 	putchar('\n');
+	return (0);
 }
