@@ -10,9 +10,9 @@ int main(void)
 	char alph[26] = "abcdefghijklmnopqrstuvwxyz";
 	int i;
 
-	for (i = 0, i < 26, i++)
+	for (i = 0; i < 26; i++)
 	{
-		if (alph[i] != 'q') || if (alph[i] != 'e')
+		if (alph[i] != 'q' || alph[i] != 'e')
 		{
 			putchar(alph[i]);
 		}
@@ -21,6 +21,6 @@ int main(void)
 			continue;
 		}
 	}
-	putchar("\n");
+	putchar('\n');
 	return (0);
 }
