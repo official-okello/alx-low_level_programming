@@ -7,9 +7,9 @@
  */
 int main(void)
 {
-	char alph[26] = "abcdefghijklmnopqrstuvwxyz"
+	char alph[26] = "abcdefghijklmnopqrstuvwxyz";
 
-	for (i == 0, i < len(alph), i++)
+	for (i == 0, i < 26, i++)
 	{
 		putchar(alph[i];
 	}
