@@ -12,13 +12,9 @@ int main(void)
 
 	for (i = 0; i < 26; i++)
 	{
-		if (alph[i] != 'q' || alph[i] != 'e')
+		if (alph[i] != 'q' && alph[i] != 'e')
 		{
 			putchar(alph[i]);
-		}
-		else
-		{
-			continue;
 		}
 	}
 	putchar('\n');
