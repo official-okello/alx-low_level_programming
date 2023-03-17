@@ -12,8 +12,8 @@ int main(void)
 	while (n <= 59)
 	{
 		putchar(n);
-		num++;
+		n++;
 	}
-	putchar("\n");
+	putchar('\n);
 	return (0);
 }
