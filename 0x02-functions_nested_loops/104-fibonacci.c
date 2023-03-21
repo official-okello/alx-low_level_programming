@@ -8,7 +8,7 @@
 int main(void)
 {
 	int i = 0;
-	float j = 1, k = 2;
+	long j = 1, k = 2;
 
 	while (i < 100)
 	{
