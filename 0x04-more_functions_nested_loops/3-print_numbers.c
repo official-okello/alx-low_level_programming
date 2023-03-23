@@ -2,7 +2,6 @@
 
 /**
 *print_numbers - prints 0 to 9
-*@c: ascii of number
 *Return: None
 */
 
