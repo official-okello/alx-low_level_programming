@@ -2,8 +2,6 @@
 
 /**
 *more_numbers - prints the numbers 0 to 14, 10 times
-*@c: the ancii code for digit
-*@d: the counter digit
 *Return: None
 */
 
