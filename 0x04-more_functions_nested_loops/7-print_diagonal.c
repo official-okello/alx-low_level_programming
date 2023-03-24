@@ -1,26 +1,30 @@
 #include "main.h"
 
 /**
-*print_diagonal - prints a diagonal on the screen
-*@n: the length of the diagonal
-*Return: None
-*/
-
+  * print_diagonal - Draws a diagonal
+  * @n: The size of diagonal
+  *
+  * Return: none
+  */
 void print_diagonal(int n)
 {
-	int i = 0;
+	int x, y;
 
-	if (n > 0)
+	if (n <= 0)
 	{
-		while (i < n)
-		{
-			_putchar('\\');
-			i++;
-		}
 		_putchar('\n');
 	}
 	else
 	{
-		_putchar('\n');
+		for (x = 0; x < n; x++)
+		{
+			for (y = 0; y < x; y++)
+			{
+				_putchar(32);
+			}
+
+			_putchar(92);
+			_putchar('\n');
+		}
 	}
 }
