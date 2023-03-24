@@ -2,12 +2,11 @@
 
 /**
 *print_line - prints a line on the screen
-*@i: the counter
-*@n: the length of the line
+*@n: size of line
 *Return: None
 */
 
-void print_line(int n)()
+void print_line(int n)
 {
 	int i = 0;
 
