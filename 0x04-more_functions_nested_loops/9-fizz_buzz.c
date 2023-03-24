@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "main.h"
 
 /**
 *main - prints 1 to 100 but replaces multiplies of 3, 5, both
@@ -13,21 +14,21 @@ int main(void)
 	{
 		if (i % 3 == 0 && i % 5 == 0)
 		{
-			putchar('FizzBuzz');
+			_putchar('FizzBuzz');
 		}
 		else if (i % 3 == 0)
 		{
-			putchar('Fizz');
+			_putchar('Fizz');
 		}
 		else if (i % 5 == 0)
 		{
-			putchar('Buzz');
+			_putchar('Buzz');
 		}
 		else
 		{
 			printf("%d", i);
 		}
-		putchar(' ');
+		_putchar(' ');
 	}
 	return (0);
 }
