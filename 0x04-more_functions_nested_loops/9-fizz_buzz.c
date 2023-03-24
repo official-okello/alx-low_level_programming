@@ -1,34 +1,41 @@
-#include <stdio.h>
 #include "main.h"
+#include <stdio.h>
 
 /**
-*main - prints 1 to 100 but replaces multiplies of 3, 5, both
-*Return: 0
-*/
-
+  * main - Prints 1 to 100
+  *
+  * Return: 0
+  */
 int main(void)
 {
-	int i;
+	int x;
 
-	for (i = 1; i <= 100; i++)
+	for (x = 1; x <= 100; x++)
 	{
-		if (i % 3 == 0 && i % 5 == 0)
+		if ((x % 3 == 0) && (x % 5 == 0))
 		{
-			_putchar('FizzBuzz');
+			printf("FizzBuzz");
 		}
-		else if (i % 3 == 0)
+		else if (x % 3 == 0)
 		{
-			_putchar('Fizz');
+			printf("Fizz");
 		}
-		else if (i % 5 == 0)
+		else if (x % 5 == 0)
 		{
-			_putchar('Buzz');
+			printf("Buzz");
 		}
 		else
 		{
-			printf("%d", i);
+			printf("%d", x);
 		}
-		_putchar(' ');
+
+		if (x != 100)
+		{
+			printf(" ");
+		}
 	}
+
+	printf("\n");
+
 	return (0);
 }
