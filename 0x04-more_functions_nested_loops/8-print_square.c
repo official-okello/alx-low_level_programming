@@ -2,8 +2,6 @@
 
 /**
 *print_square - prints a square
-*@i: counter
-*@j: counter
 *@size: size of square
 *Return: none
 */
