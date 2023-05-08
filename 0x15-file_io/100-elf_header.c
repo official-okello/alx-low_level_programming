@@ -7,75 +7,12 @@
 #include <elf.h>
 
 /**
- * prints - prints data
- * @ptr: pointer.
+ * print_addr - prints address
+ * @ptr: magic.
  * Return: none.
  */
-void prints(char *ptr)
+void print_addr(char *ptr)
 {
-	int bytes;
-
-	printf("  Magic:  ");
-
-	for (bytes = 0; bytes < 16; bytes++)
-		printf(" %02x", ptr[bytes]);
-
-	printf("\n");
-
-	char data = ptr[5];
-
-	printf("  Data:                              2's complement");
-	if (data == 1)
-		printf(", little endian\n");
-
-	if (data == 2)
-		printf(", big endian\n");
-
-	
-	int version = ptr[6];
-
-	printf("  Version:                           %d", version);
-
-	if (version == EV_CURRENT)
-		printf(" (current)");
-
-	printf("\n");
-
-	char osabi = ptr[7];
-
-	printf("  OS/ABI:                            ");
-	if (osabi == 0)
-		printf("UNIX - System V\n");
-	else if (osabi == 2)
-		printf("UNIX - NetBSD\n");
-	else if (osabi == 6)
-		printf("UNIX - Solaris\n");
-	else
-		printf("<unknown: %x>\n", osabi);
-
-	printf("  ABI Version:                       %d\n", ptr[8]);
-
-	char type = ptr[16];
-
-	if (ptr[5] == 1)
-		type = ptr[16];
-	else
-		type = ptr[17];
-
-	printf("  Type:                              ");
-	if (type == 0)
-		printf("NONE (No file type)\n");
-	else if (type == 1)
-		printf("REL (Relocatable file)\n");
-	else if (type == 2)
-		printf("EXEC (Executable file)\n");
-	else if (type == 3)
-		printf("DYN (Shared object file)\n");
-	else if (type == 4)
-		printf("CORE (Core file)\n");
-	else
-		printf("<unknown: %x>\n", type);
-
 	int i;
 	int begin;
 	char sys;
@@ -112,7 +49,15 @@ void prints(char *ptr)
 		}
 	}
 	printf("\n");
+}
 
+/**
+ * print_type - prints type
+ * @ptr: magic.
+ * Return: none.
+ */
+void print_type(char *ptr)
+{
 	char type = ptr[16];
 
 	if (ptr[5] == 1)
@@ -136,17 +81,86 @@ void prints(char *ptr)
 }
 
 /**
- * checks - does checks
- * @ptr: pointer.
+ * print_osabi - prints osabi
+ * @ptr: magic.
  * Return: none.
  */
-void checks(char *ptr)
-{	
+void print_osabi(char *ptr)
+{
+	char osabi = ptr[7];
+
+	printf("  OS/ABI:                            ");
+	if (osabi == 0)
+		printf("UNIX - System V\n");
+	else if (osabi == 2)
+		printf("UNIX - NetBSD\n");
+	else if (osabi == 6)
+		printf("UNIX - Solaris\n");
+	else
+		printf("<unknown: %x>\n", osabi);
+
+	printf("  ABI Version:                       %d\n", ptr[8]);
+}
+
+
+/**
+ * print_version - prints version
+ * @ptr: magic.
+ * Return: none.
+ */
+void print_version(char *ptr)
+{
+	int version = ptr[6];
+
+	printf("  Version:                           %d", version);
+
+	if (version == EV_CURRENT)
+		printf(" (current)");
+
+	printf("\n");
+}
+/**
+ * print_data - prints data
+ * @ptr: magic.
+ * Return: none.
+ */
+void print_data(char *ptr)
+{
+	char data = ptr[5];
+
+	printf("  Data:                              2's complement");
+	if (data == 1)
+		printf(", little endian\n");
+
+	if (data == 2)
+		printf(", big endian\n");
+}
+/**
+ * print_magic - prints magic info.
+ * @ptr: magic.
+ * Return: none.
+ */
+void print_magic(char *ptr)
+{
+	int bytes;
+
+	printf("  Magic:  ");
+
+	for (bytes = 0; bytes < 16; bytes++)
+		printf(" %02x", ptr[bytes]);
+
+	printf("\n");
+
+}
+
+/**
+ * check_sys - check the version system.
+ * @ptr: magic.
+ * Return: none.
+ */
+void check_sys(char *ptr)
+{
 	char sys = ptr[4] + '0';
-	int addr = (int)ptr[0];
-	char E = ptr[1];
-	char L = ptr[2];
-	char F = ptr[3];
 
 	if (sys == '0')
 		exit(98);
@@ -165,6 +179,19 @@ void checks(char *ptr)
 	print_osabi(ptr);
 	print_type(ptr);
 	print_addr(ptr);
+}
+
+/**
+ * check_elf - check if it is an elf file.
+ * @ptr: magic.
+ * Return: 1 if it is an elf file. 0 if not.
+ */
+int check_elf(char *ptr)
+{
+	int addr = (int)ptr[0];
+	char E = ptr[1];
+	char L = ptr[2];
+	char F = ptr[3];
 
 	if (addr == 127 && E == 'E' && L == 'L' && F == 'F')
 		return (1);
@@ -172,6 +199,12 @@ void checks(char *ptr)
 	return (0);
 }
 
+/**
+ * main - check the code for Holberton School students.
+ * @argc: number of arguments.
+ * @argv: arguments vector.
+ * Return: 0.
+ */
 int main(int argc, char *argv[])
 {
 	int fd, ret_read;
