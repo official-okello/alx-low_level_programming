@@ -1,4 +1,4 @@
 # Automates the compilation of a C program
 
-all: main.c school.c message.h
+all:
 	gcc main.c school.c -o school
