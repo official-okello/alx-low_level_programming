@@ -1,59 +1,51 @@
-#include <math.h>
 #include "search_algos.h"
+#include <math.h>
 
 /**
- * get_n_next - Gets the nth node next to a given node
- * @node: starting node
- * @n: number of positions next to the node
- * Return: node n places next to given node, last node or NULL
- */
-
-listint_t *get_n_next(listint_t *node, size_t n)
-{
-	size_t i = 0;
-	listint_t *res = NULL;
-
-	res = node;
-	for (i = 0; (i < n) && (res) && (res->next); i++)
-		res = res->next;
-	return (res);
-}
-
-/**
- * jump_list - Searches a value in a sorted linked list using jump search
- * @list: linked list to search in
- * @size: length of the linked list
- * @value: value to look for
- * Return: node with the value in the linked list or NULL
+ * jump_list - searches for a value in array of
+ * integers using Jump search algorithm
+ * @list: input list
+ * @size: size of array
+ * @value: value to search in
+ * Return: index of number
  */
 
 listint_t *jump_list(listint_t *list, size_t size, int value)
 {
-	size_t step, a = 0, b = 0;
-	listint_t *node, *next;
+	size_t index, k, m;
+	listint_t *prev;
 
-	if (!list)
+	if (list == NULL || size == 0)
 		return (NULL);
-	step = (size_t)sqrt(size);
-	node = list;
-	next = get_n_next(node, step);
-	while (node)
+
+	m = (size_t)sqrt((double)size);
+	index = 0;
+	k = 0;
+
+	do {
+		prev = list;
+		k++;
+		index = k * m;
+
+		while (list->next && list->index < index)
+			list = list->next;
+
+		if (list->next == NULL && index != list->index)
+			index = list->index;
+
+		printf("Value checked at index [%d] = [%d]\n", (int)index, list->n);
+
+	} while (index < size && list->next && list->n < value);
+
+	printf("Value found between indexes ");
+	printf("[%d] and [%d]\n", (int)prev->index, (int)list->index);
+
+	for (; prev && prev->index <= list->index; prev = prev->next)
 	{
-		printf("Value checked at index [%d] = [%d]\n", (int)next->index, next->n);
-		if ((next->n >= value) || (!next->next))
-			break;
-		node = next;
-		next = get_n_next(node, step);
+		printf("Value checked at index [%d] = [%d]\n", (int)prev->index, prev->n);
+		if (prev->n == value)
+			return (prev);
 	}
-	a = node->index;
-	b = next->index;
-	printf("Value found between indexes [%d] and [%d]\n", (int)a, (int)b);
-	while (node)
-	{
-		printf("Value checked at index [%d] = [%d]\n", (int)node->index, node->n);
-		if (node->n == value)
-			return (node);
-		node = node->next;
-	}
+
 	return (NULL);
 }
